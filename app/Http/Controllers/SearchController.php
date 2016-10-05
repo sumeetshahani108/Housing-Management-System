@@ -72,8 +72,8 @@ class SearchController extends Controller
             $apt->where('price','<=',$request->input('max_price'));
         }
         $query = $apt->get();
-        //$query;
-        return view('test',['apartment' => $query]);
+        echo $query;
+        //return view('test',['apartment' => $query]);
     }
 
     public function create()

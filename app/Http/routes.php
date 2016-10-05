@@ -26,10 +26,14 @@ Route::post('/home',[
     'as' => 'signup.owner'
 ]);
 
+Route::get('/signin',function(){
+    return view('owner.login');
+});
 
 //get request for sign-in
-Route::get('/home',[
-    'uses' => ''
+Route::post('/my-home',[
+    'uses' => 'OwnerController@ownerSignIn',
+    'as' => 'login.owner'
 ]);
 
 Route::get('/index',function(){
@@ -43,6 +47,10 @@ Route::get('/get',[
 
 
 Route::get('/home','SearchController@viewSearchFilter');
+
+Route::get("/apartment","apt_data_controller@index");
+Route::post("/apartmentbasic","apt_data_controller@store");
+Route::post("apartmentadditonal","apt_details_controller@store");
 
 $api->version('v1', function ($api) {
     $api->post('oauth/access_token', function() {

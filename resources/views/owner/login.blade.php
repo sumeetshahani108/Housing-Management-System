@@ -1,16 +1,21 @@
 
-@section('content')
-    {!! Form::open(['route' => 'specify_the_name_here', 'method' => 'post']) !!}
+    {!! Form::open(['route' => 'login.owner', 'method' => 'post']) !!}
 
     <div>
-        {!! Form::label('username', 'Enter Your Username') !!}
-        {!! Form::text('password') !!}
-    </div>
+        {!! Form::label('email', 'Enter Your Email') !!}
+        {!! Form::text('email') !!}
+    </div><br>
 
     <div>
         {!! Form::label('password', 'Enter your Password') !!}
-        {!! Form::text('password') !!}
+        {!! Form::password('password') !!}
+    </div><br>
+
+    <div>
+        {!! Form::submit('Log in') !!}
     </div>
 
-    {!! Form::close() !!}}
-@endsection
+    <div>
+        <input type="hidden" name="_token" value="{{ Session::token() }}">
+    </div>
+    {!! Form::close() !!}

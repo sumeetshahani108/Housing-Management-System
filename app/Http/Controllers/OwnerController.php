@@ -9,6 +9,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Mail;
 use Session;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+
 
 class OwnerController extends Controller
 {
@@ -34,6 +38,18 @@ class OwnerController extends Controller
         //validate() is a helper function developed in laravel framework.
         // include in App\Http\Controllers\Controller
 
+        $this->validate($request, [
+            'email' => 'required|email|unique:owner',
+            'first_name' => 'required|max:120',
+            'last_name'=>'required|max:120',
+            'contact' => 'required|max:15',
+            'address' => 'required',
+            'gender' => 'required',
+            'age' => 'required',
+            'regulations' => 'required',
+            'password' => 'required|min:4'
+        ]);
+
         $first_name = $request['first_name'];
         $last_name = $request['last_name'];
         $email = $request['email'];
@@ -57,18 +73,7 @@ class OwnerController extends Controller
 
         $Owner->save();
 
-        $this->validate($request, [
-           'email' => 'required|email|unique:owner',
-           'first_name' => 'required|max:120',
-           'last_name'=>'required|max:120',
-           'contact' => 'required|max:15',
-           'address' => 'required',
-           'gender' => 'required',
-           'age' => 'required',
-           'regulations' => 'required',
-           'password' => 'required|min:4'
-       ]);
-
+        Auth::login($Owner);
         /*
         $data = [];
         $data['email'] = $email;
@@ -84,12 +89,30 @@ class OwnerController extends Controller
         */
         //Session::flash('success','Your email was sent');
 
-        return redirect()->route('test');
+        return view('welcome');
     }
 
-    public function getOwnerSignup(){
-      //Home Page form view
-      return view('pages.contact');
+    public function ownerSignIn(Request $request){
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        $data = array(
+            'email' => $request['email'],
+            'password' => $request['password']
+        );
+
+        $authentication = Auth::attempt($data);
+        if ($authentication) {
+            return view('welcome');
+        }
+        return view('home');
+    }
+
+    public function logOut(){
+        Auth::logout();
+        //redirection route ;
     }
 
     public function create()
