@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Create_apt;
+use App\Apartment;
 use Illuminate\Http\Request;
-
+use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -30,24 +30,6 @@ class apt_details_controller extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $user = new Create_apt();
-        $user->no_of_bathrooms = Input::get("no_of_bathrooms");
-        $user->no_of_bedrooms = Input::get("no_of_bedrooms");
-        $user->flooring_type = Input::get("flooring_type");
-        $user->apt_condition = Input::get("apt_condition");
-        $user->owner = Input::get("owner");
-        $user->year_of_construction = Input::get("year_of_construction");
-        $user->save();
-        return view('welcome');
-    }
 
     /**
      * Display the specified resource.
@@ -55,6 +37,16 @@ class apt_details_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function getDetails($apt_id, Apartment $apartment){
+        //get the details of the apartment using the $id
+        $my_data_query = $apartment->newQuery();
+        $my_data_query->where('apt_id',$apt_id);
+        $data = $my_data_query->get();
+        echo $data;
+        //return view('apartment.details-view',['my_apartment_details' => $data]);
+    }
+
     public function show($id)
     {
         //

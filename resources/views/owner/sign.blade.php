@@ -1,6 +1,6 @@
 
 
-    {!! Form::open(array('route' => 'signup.owner', 'method' => 'post', 'files'=>true, 'before' => 'csrf' )) !!}
+    {!! Form::open(['route' => 'sign-up.owner', 'method' => 'post', 'files'=>true, 'before' => 'csrf']) !!}
 
     <div>
         {!! Form::label('first_name', 'First Name') !!}

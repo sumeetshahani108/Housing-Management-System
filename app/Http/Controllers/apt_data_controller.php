@@ -9,10 +9,11 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Create_apt ;
-
+use App\Owner ;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class apt_data_controller extends Controller
 {
@@ -23,7 +24,10 @@ class apt_data_controller extends Controller
      */
     public function index()
     {
-         return view("apartment.apt_data");
+        if(Auth::check()){
+            return view("apartment.apt_data");
+        }
+
     }
 
     /**
@@ -45,19 +49,19 @@ class apt_data_controller extends Controller
     public function store(Request $request)
     {
         $user = new Create_apt();
-        $user->type_of_apartment = Input::get("toa");
-        $user->locality = Input::get("locality");
-        $user->city = Input::get("city");
-        $user->price = Input::get("price");
-        $user->carpet_area = Input::get("carpet_area");
-        $user->BHK = Input::get("bhk");
-        $user->no_of_bathrooms = Input::get("no_of_bathrooms");
-        $user->no_of_bedrooms = Input::get("no_of_bedrooms");
-        $user->flooring_type = Input::get("flooring_type");
-        $user->apt_condition = Input::get("apt_condition");
-        $user->owner = Input::get("owner");
-        $user->year_of_construction = Input::get("year_of_construction");
-
+        $user->type_of_apartment = $request['toa'];
+        $user->locality = $request['locality'];
+        $user->city = $request['city'];
+        $user->price = $request['price'];
+        $user->carpet_area = $request['carpet_area'];
+        $user->BHK = $request['bhk'];
+        //$user->no_of_bathrooms = $request['no_of_bathrooms'];
+        $user->no_of_bedrooms = $request['no_of_bedrooms'];
+        $user->flooring_type = $request['flooring_type'];
+        $user->apt_condition = $request['apt_condition'];
+        $user->owner = $request['owner'];
+        $user->year_of_construction = $request['year_of_construction'];
+        $user->owner_id = Auth::user()->owner_id ;
         //Image upload functionality
         /*
         $file = $request->file('image');
@@ -68,12 +72,13 @@ class apt_data_controller extends Controller
             Storage::disk('local')->put($filename,File::get($file));
         }
         */
+        /*
         if(Input::hasFile('image')){
             $file = Input::file('image');
-            $file->move(public_path().'/',$file->getClientOriginalName());
+            $file->move(public_path().'/'.$file->getClientOriginalName());
             $user->apt_image = $file->getClientOriginalName();
         }
-
+        */
 
         /*
         if($request->owner()->apartment()->save($user)){
@@ -81,7 +86,11 @@ class apt_data_controller extends Controller
         }
         */
         $user->save();
-        return view('welcome');
+        if(Auth::check()){
+            return view('master');
+        }
+
+
     }
 
     public function getUserImage($filename){

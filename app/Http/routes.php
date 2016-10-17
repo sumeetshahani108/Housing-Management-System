@@ -15,40 +15,56 @@ use Illuminate\Support\Facades\Mail ;
 
 $api = app('Dingo\Api\Routing\Router');
 
-
-Route::get('/signup',function(){
-    return view('owner.sign');
+//default redirection route
+Route::get('/welcome',function(){
+    return view('welcome');
 });
 
-//post request for sign-up
-Route::post('/home',[
+//Route for sign-in owner
+Route::get('/view',function(){
+   return view('owner.sign');
+});
+
+Route::post('/signup',[
     'uses' => 'OwnerController@signUpOwner',
-    'as' => 'signup.owner'
+    'as' => 'sign-up.owner'
 ]);
 
-Route::get('/signin',function(){
-    return view('owner.login');
+//Route for log-in owner
+Route::get('login',function(){
+   return View::make('owner.login');
 });
 
-//get request for sign-in
-Route::post('/my-home',[
-    'uses' => 'OwnerController@ownerSignIn',
-    'as' => 'login.owner'
+Route::post('login','OwnerController@ownerSignIn');
+
+//Route for details view
+Route::get('/view-details/{id}',[
+   'uses' => 'apt_details_controller@getDetails',
+    'as' => 'apartment.details-view'
 ]);
 
-Route::get('/index',function(){
-  return view('index');
-});
-
+//Routes for the Search filters
 Route::get('/get',[
     'uses' => 'SearchController@search',
     'as' => 'test'
 ]);
 
-
 Route::get('/home','SearchController@viewSearchFilter');
 
-Route::get("/apartment","apt_data_controller@index");
+//Password reset routes
+
+
+//Routes to create the apartment
+Route::get("/apartment",[
+    'uses' => 'apt_data_controller@index',
+    'as' => 'create.apt'
+]);
+
+Route::get('/owner-apartments',[
+    'uses' => 'OwnerController@viewMyApartments',
+    'as' => 'get.owner.apartments'
+]);
+
 Route::post("/apartmentbasic","apt_data_controller@store");
 Route::post("apartmentadditonal","apt_details_controller@store");
 

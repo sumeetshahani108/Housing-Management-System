@@ -71,9 +71,10 @@ class SearchController extends Controller
         if($request->has('max_price')){
             $apt->where('price','<=',$request->input('max_price'));
         }
-        $query = $apt->get();
-        echo $query;
-        //return view('test',['apartment' => $query]);
+        //laravel handles the pagination.
+        $query = $apt->orderBy('apt_id','desc')->paginate(5);
+        //echo $query;
+        return view('test',['apartment' => $query]);
     }
 
     public function create()

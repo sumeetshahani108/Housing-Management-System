@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 //This class is to get the request object.
 use Illuminate\Http\Request;
+use App\Apartment;
+use DB;
 use App\Owner;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Mail;
 use Session;
 use Illuminate\Support\Facades\Auth;
@@ -73,7 +76,9 @@ class OwnerController extends Controller
 
         $Owner->save();
 
-        Auth::login($Owner);
+        if(Auth::login($Owner)){
+            return redirect()->route('welcome');
+        }
         /*
         $data = [];
         $data['email'] = $email;
@@ -89,25 +94,45 @@ class OwnerController extends Controller
         */
         //Session::flash('success','Your email was sent');
 
+    }
+
+    public function viewWelcome(){
         return view('welcome');
     }
 
     public function ownerSignIn(Request $request){
-        $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required'
-        ]);
+        //Get all the post data
+        $data = Input::all();
 
-        $data = array(
-            'email' => $request['email'],
-            'password' => $request['password']
+        //Applying validation rules
+        $rules = array(
+            'email' => 'required | email',
+            'password' => 'required | min : 6',
+        );
+        $userdata = array(
+            'email' => Input::get('email'),
+            'password' => Input::get('password')
         );
 
-        $authentication = Auth::attempt($data);
-        if ($authentication) {
-            return view('welcome');
+        //login
+        if(Auth::validate($userdata)){
+            if(Auth::attempt($userdata)){
+                return redirect()->route('create.apt');
+            }
+        }else{
+            echo "Failed Session";
         }
-        return view('home');
+    }
+
+    public function viewMyApartments(Apartment $apartment){
+        if(Auth::check()){
+            $owner_id = Auth::user()->owner_id;
+            $owner_apartments = $apartment->newQuery();
+            $owner_apartments->where('owner_id', $owner_id);
+            $query = $owner_apartments->orderBy('apt_id','desc')->paginate(5);
+            echo $query;
+        }
+
     }
 
     public function logOut(){

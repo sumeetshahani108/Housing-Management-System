@@ -1,0 +1,1 @@
+<h1>{{ $my_apartment_details->locality }}</h1>

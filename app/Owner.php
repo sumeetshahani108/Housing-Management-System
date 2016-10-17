@@ -10,7 +10,7 @@ class Owner extends Model implements Authenticatable
     //define in the model, what is the name of the table
     use \Illuminate\Auth\Authenticatable;
     protected $table = 'owner';
-
+    protected $primaryKey = 'owner_id';
     //if we don't write the timestamp, it gives the error : column not found
     public $timestamps = false;
 

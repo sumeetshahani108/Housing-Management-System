@@ -1,5 +1,5 @@
 
-    {!! Form::open(['route' => 'login.owner', 'method' => 'post']) !!}
+    {!! Form::open(['url' => 'login']) !!}
 
     <div>
         {!! Form::label('email', 'Enter Your Email') !!}
