@@ -18,4 +18,6 @@
     <div>
         <input type="hidden" name="_token" value="{{ Session::token() }}">
     </div>
+
+    <p><a href="{{ url('password/email') }}"> Forgot Password </a></p>
     {!! Form::close() !!}

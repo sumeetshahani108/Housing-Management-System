@@ -20,6 +20,18 @@ Route::get('/welcome',function(){
     return view('welcome');
 });
 
+Route::post('/viewApts', 'SearchController@searchApts');
+
+//Return singin page
+Route::get('/buy',function(){
+    return view('owner.sign');
+});
+
+Route::get('/buy',[
+    'uses' => 'SearchController@viewSignIn',
+    'as' => 'buy'
+]);
+
 //Route for sign-in owner
 Route::get('/view',function(){
    return view('owner.sign');
@@ -43,6 +55,9 @@ Route::get('/view-details/{id}',[
     'as' => 'apartment.details-view'
 ]);
 
+//Route for AJAX request
+Route::get('home/{value}', 'SearchController@getApartments');
+
 //Routes for the Search filters
 Route::get('/get',[
     'uses' => 'SearchController@search',
@@ -52,7 +67,15 @@ Route::get('/get',[
 Route::get('/home','SearchController@viewSearchFilter');
 
 //Password reset routes
+// ? indicates that it is optional, It may or may not be present in the URL.
 
+//Password reset link request routes
+Route::get('password/email', 'Auth\PasswordController@getEmail');
+Route::post('password/email', 'Auth\PasswordController@postEmail');
+
+//Password reset routes
+Route::get('password/reset/{token?}', 'Auth\PasswordController@getReset');
+Route::post('password/reset','Auth\PasswordController@postReset');
 
 //Routes to create the apartment
 Route::get("/apartment",[

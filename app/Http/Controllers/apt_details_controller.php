@@ -43,8 +43,8 @@ class apt_details_controller extends Controller
         $my_data_query = $apartment->newQuery();
         $my_data_query->where('apt_id',$apt_id);
         $data = $my_data_query->get();
-        echo $data;
-        //return view('apartment.details-view',['my_apartment_details' => $data]);
+        //echo $data;
+        return view('apartment.details-view',['my_apartment_details' => $data]);
     }
 
     public function show($id)

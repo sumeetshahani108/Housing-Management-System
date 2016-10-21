@@ -7,6 +7,10 @@
 <head>
 
     <link rel = "stylesheet" href = "<?php echo asset('css/filter.css')?>">
+    <!--We usually place the google maps API below jQuery-->
+
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </head>
 <body>
    
@@ -53,7 +57,12 @@
             {!! $apartment->render() !!}
         </div>
 
-@endsection
+        <div class="google-map">
+            <div id="map">
+
+            </div>
+        </div>
+     @endsection
 </body>
 </html>
 

@@ -75,6 +75,25 @@ class SearchController extends Controller
         $query = $apt->orderBy('apt_id','desc')->paginate(5);
         //echo $query;
         return view('test',['apartment' => $query]);
+        //return view('maps',['apartment' => $query]);
+    }
+
+    public function getApartments($value){
+        $apartments = Apartment::where('city',$value);
+        $apts = $apartments->get();
+        return response()->json(['success' => true, 'apartment' => $apts]);
+    }
+
+    public function viewSignIn(){
+        return view('owner.sign');
+    }
+
+    public function searchApts(Request $request){
+        $lat = $request->lat;
+        $lng = $request->lng;
+        // This lat and long is the current location of the user
+        $apts = Apartment::whereBetween('lat',[$lat-0.1,$lat+0.1])->whereBetween('lng',[$lng-0.1,$lng+0.1]);
+        return $apts;
     }
 
     public function create()
