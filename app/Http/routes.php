@@ -66,6 +66,9 @@ Route::get('/get',[
 
 Route::get('/home','SearchController@viewSearchFilter');
 
+//Booking the Apartment
+
+
 //Password reset routes
 // ? indicates that it is optional, It may or may not be present in the URL.
 
