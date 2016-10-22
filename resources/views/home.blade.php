@@ -1,4 +1,4 @@
-@extends('layouts.master')
+
 <html>
     <head>
         <style>
@@ -380,6 +380,119 @@
                 font-size: 37px;
                 color: white;
             }
+            .footer{
+                font-family: sans-serif;
+                background-color: #5f6369;
+                padding: 5px;
+                position: absolute;
+                left:0;
+                right:0;
+            }
+            ul.address-list{
+                display: inline-block;
+                color: #ffffff;
+                text-decoration: none;
+                list-style-type: none;
+                float: left;
+                clear: right;
+                padding: 25px;
+            }
+            .list-item-1{
+                display: inline;
+                color: #ffffff;
+            }
+            .list-item-2{
+                display: inline;
+                color: #ffffff;
+            }
+
+            .footer-circle{
+                padding: 5px;
+                min-width: 20px;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                border-radius: 50%;
+            }
+            .social-media-link .social-media-element {
+                list-style-type: none;
+                display: inline;
+                object-fit: none;
+                object-position: center;
+                height: 100px;
+                width: 100px;
+                margin: 4px;
+            }
+            .social-media-link .social-media-element .media-link i {
+                color: #5f6369;
+                font-size: 20px;
+                text-align: center;
+                transition: all 0.2s ease-in-out;
+                text-align: center;
+                object-position: center;
+                background-color: #ffffff;
+                padding-top: 5px;
+            }
+            .social-media-link .social-media-element .media-link i:hover {
+                color: #5f6369;
+                background-color: #ccced1;
+            }
+            .last-line{
+                color: #ffffff;
+                text-align: center;
+                clear: both;
+                margin: 0px;
+                padding: 0px;
+            }
+            .social-links{
+                float: right;
+            }
+            .last-line span{
+                color: #ffffff;
+            }
+            .last-line span:hover{
+                text-decoration: underline;
+                cursor: pointer;
+            }
+            .my-suggestions{
+                border: 1px solid #000000;
+                width: 1300px;
+                height: 300px;
+                margin-left: 20px;
+                margin-top: 20px;
+            }
+            .loaded-image-1{
+                border: 1px solid #000000;
+                width: 300px;
+                height: 250px;
+                margin-left: 100px;
+                margin-top: 20px;
+            }
+            .loaded-image-2{
+                border: 1px solid #000000;
+                width: 300px;
+                height: 250px;
+                margin-left: 100px;
+                margin-top: 20px;
+            }
+            .loaded-image-3{
+                border: 1px solid #000000;
+                width: 300px;
+                height: 250px;
+                margin-left: 100px;
+                margin-top: 20px;
+            }
+            #my-image-1{
+               width: 300px;
+                height: 200px;
+            }
+            #my-image-2{
+                width: 300px;
+                height: 200px;
+            }
+            #my-image-3{
+                width: 300px;
+                height: 200px;
+            }
             /*End dest*/
         </style>
         <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
@@ -387,24 +500,46 @@
             $(document).ready(function(){
                var select  = document.getElementById('city');
                 select.onchange = function(){
+                    var count;
                     var index = select.selectedIndex;
                     console.log(index);
                     var value = select.options[index].innerHTML;
                     console.log(value);
-
+                    document.getElementById('suggestion-header').innerHTML = value;
                     $.get('/home/'+value,function(response){
                         if(response.success){
+                            console.log(response.apartment);
+                            var my_apartment_array = response.apartment ;
+                            var loc1 = my_apartment_array[0].locality;
+                            var loc2 = my_apartment_array[1].locality;
+                            var loc3 = my_apartment_array[2].locality;
 
 
+                            my_apartment_array.forEach(function(i){
+                                 count++ ;
+                            });
+                            //var locality = response.apartment[0].locality;
+                            document.getElementById('loaded-text-1').innerHTML = loc1;
+                            document.getElementById('loaded-text-2').innerHTML = loc2;
+                            document.getElementById('loaded-text-3').innerHTML = loc3;
+
+                            var img1 = my_apartment_array[0].apt_image;
+                            var img2 = my_apartment_array[1].apt_image;
+                            var img3 = my_apartment_array[2].apt_image;
+
+                            document.getElementById('my-image-1').setAttribute();
+                            document.getElementById('my-image-2').setAttribute();
+                            document.getElementById('my-image-3').setAttribute();
                         }
                     });
                 }
             });
         </script>
-
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-    @section('content')
+
             <!-- header -->
     <div class = "top-container">
         <div class = "top-left-container">
@@ -440,7 +575,7 @@
                 <div class = "form-filter">
                     {!! Form::open(['route' => 'test', 'method' => 'get']) !!}
 
-                    {!! Form::select('city',['mumbai' => 'Mumbai','bangalore' => 'Bangalore','chennai' => 'Chennai','pune' => 'Pune','delhi' => 'Delhi','kolkatta' => 'Kolkatta'],null,['onchange' => 'showCity()','class' => 'city']) !!}
+                    {!! Form::select('city',['mumbai' => 'Mumbai','bangalore' => 'Bangalore','chennai' => 'Chennai','pune' => 'Pune','delhi' => 'Delhi','kolkatta' => 'Kolkatta'],null,['class' => 'city', 'id' => 'city']) !!}
 
                     {!! Form::text('locality',null,array('placeholder' => 'Search by Locality','class' => 'locality')) !!}
 
@@ -466,8 +601,8 @@
     <div id="txtHint"></div>
 
     <script>
-        function showCity() {
-            var x = document.getElementById("city").value;
+        //function showCity() {
+            //var x = document.getElementById("city").value;
 
             /*
 
@@ -480,11 +615,11 @@
                 }
             }); */
 
-        }
+        //}
     </script>
 
 
-    <script>
+    <!--<script>
         var myIndex = 0;
         carousel();
 
@@ -499,7 +634,7 @@
             x[myIndex-1].style.display = "block";
             setTimeout(carousel, 7000);
         }
-    </script>
+    </script>-->
     <!-- Login Modal -->
 
 
@@ -557,7 +692,69 @@
         </div>
     </div>
     <!--End destinations -->
-    @endsection
+            <!--Suggestions-->
+            <div class="suggestions">
+                <h2>Top Collections in <span id="suggestion-header">Mumbai</span></h2>
+                <div class="my-suggestions">
+                    <div class="my-container">
+                        <div class="loaded-image-1">
+                            <img src="img/greece.jpg" id="my-image-1">
+                            <div id="loaded-text-1"></div>
+                        </div>
+                    </div>
+                    <div class="my-container">
+                        <div class="loaded-image-2">
+                            <img src="img/paris.jpg" id="my-image-2">
+                            <div id="loaded-text-2"></div>
+                        </div>
+                    </div>
+                    <div class="my-container">
+                        <div class="loaded-image-3">
+                            <img src="img/mumbai.jpg" id="my-image-3">
+                            <div id="loaded-text-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <!--Youtube Video Links-->
+            <div class="container" style="margin-top: 50px; margin-bottom: 50px">
+                <div class="row" style="display:inline;">
+                    <div class="col-md-6" style="display:inline; margin-right: 100px; margin-left: 120px">
+                        <div class="video" style="display:inline;">
+                            <iframe width="400" height="215" src="https://www.youtube.com/embed/kiWzJSu7JZ4" frameborder="2" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="display:inline; margin-right: 100px; margin-left: 120px">
+                        <div class="video" style="display:inline;">
+                            <iframe width="400" height="215" src="https://www.youtube.com/embed/N2Z4GGiaaRE" frameborder="2" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!--footer-->
+            <div class="footer">
+                <div class="footer-text">
+                    <ul class="address-list">
+                        <li id="name" class="list-item-1">
+                             Follow us on the Social Network
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="social-links">
+                    <ul class="social-media-link">
+                        <li class="social-media-element"><a href="http://facebook.com/" class="media-link"><i class="fa fa-facebook footer-circle" ></i></a></li>
+                        <li class="social-media-element"><a href="http://linkedin.com/" class="media-link"><i class="fa fa-linkedin footer-circle"></i></a></li>
+                        <li class="social-media-element"><a href="http://twitter.com/" class="media-link"><i class="fa fa-twitter footer-circle"></i></a></li>
+                        <li class="social-media-element"><a href="http://plus.google.com/" class="media-link"><i class="fa fa-google-plus footer-circle"></i> </a></li>
+                    </ul>
+                </div>
+                <div class="last-line">
+                    <p>&copy; <span>APARTMENT TRACKER</span> 2016/ All rights reserved.
+                    </p>
+                </div>
+            </div>
 
     </body>
 </html>

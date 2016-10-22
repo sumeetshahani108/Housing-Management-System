@@ -38,7 +38,7 @@
             <section>
                 <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
                     <div class="feature boxed bg-secondary">
-                        <form class="text-center form-email" data-error="There were errors, please check all required fields and try again" data-success="Thanks for taking the time to complete the planner. We'll be in touch shortly!" action = "apartmentbasic" method = "post">
+                        <form class="text-center form-email" data-error="There were errors, please check all required fields and try again" data-success="Thanks for taking the time to complete the planner. We'll be in touch shortly!" action = "apartmentbasic" method = "post" enctype="multipart/form-data">
                             <h4 class="uppercase mt48 mt-xs-0">Create your Apartment</h4>
                             <p class="lead mb64 mb-xs-24">
                                 Share a little detail about your apartment so we
@@ -55,6 +55,7 @@
                             <!-- first tab -->
 
                                 <div id = "firsttab" class = "tab-pane-active" >
+
                                     <div class="overflow-hidden">
                                         <h6 class="uppercase">
                                             1. Area details

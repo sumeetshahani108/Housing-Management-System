@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use App\Http\Requests;
 
 use App\Http\Controllers\Controller;
-
+use Image;
 use App\Create_apt ;
 use App\Owner ;
 use Illuminate\Support\Facades\Input;
@@ -80,11 +80,21 @@ class apt_data_controller extends Controller
         }
         */
 
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $filename = time().'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(350,350)->save( public_path('/img/'.$filename) );
+            $user->apt_image = $filename;
+        }
+
         /*
         if($request->owner()->apartment()->save($user)){
             return view("welcome");
         }
         */
+
+
+
         $user->save();
         if(Auth::check()){
             return view('master');

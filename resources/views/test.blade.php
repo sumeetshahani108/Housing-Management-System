@@ -1,4 +1,4 @@
-@extends('layouts.master')
+
 
 
 
@@ -14,7 +14,7 @@
 </head>
 <body>
    
-	@section('content')
+
     @foreach($apartment as $apt)
 
     <div id="gtco-team" class="gtco-section">
@@ -22,7 +22,7 @@
             <div class="row">
                
                     <div class="item">
-                        <img src="principal.jpg" alt="" class="img-responsive">
+                        <img src="/img/{{ $apt->apt_image }}" alt="" class="img-responsive">
                         <div class="inside-text">
                             <h3>{{ $apt->BHK }}BHK {{ $apt->type_of_apartment }} at {{ $apt->locality }}</h3>
                             <div class="container diff">
@@ -62,7 +62,7 @@
 
             </div>
         </div>
-     @endsection
+
 </body>
 </html>
 

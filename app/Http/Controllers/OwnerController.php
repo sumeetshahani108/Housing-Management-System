@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-
 class OwnerController extends Controller
 {
     /**
@@ -76,24 +75,25 @@ class OwnerController extends Controller
 
         $Owner->save();
 
-        if(Auth::login($Owner)){
-            return redirect()->route('welcome');
-        }
-        /*
-        $data = [];
-        $data['email'] = $email;
-        $data['fullname'] = $first_name.$last_name;
-        $data['subject'] = "Congratulations on Creating Your Account. We look forward to Work with you.";
-        //function() here is a closure;
-        Mail::send('emails.account',$data,function(){
-          //We can change the parameter values in from and to depending on what we want to do.
-          $message->from($data['email']);
-          $message->to('sumeet.shahani@ves.ac.in');
-          $message->subject($data['subject']);
-        });
-        */
-        //Session::flash('success','Your email was sent');
 
+        //Session::flash('success','Your email was sent');
+        $data = array(
+            'email' => $email,
+            'full_name' => $first_name." ".$last_name
+        );
+        Mail::send('emails.contact', $data ,function($message) use ($data){
+            $message->from($data['email']);
+            $message->to('sumeet.shahani108@gmail.com');
+            $message->subject($data['full_name']);
+        });
+
+        if(count(Mail::failures()) > 0){
+            foreach(Mail::failures as $email_address) {
+                echo " - $email_address <br />";
+            }
+        }else{
+            return view('welcome');
+        }
     }
 
     public function viewWelcome(){

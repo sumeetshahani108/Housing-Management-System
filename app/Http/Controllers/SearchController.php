@@ -80,7 +80,7 @@ class SearchController extends Controller
 
     public function getApartments($value){
         $apartments = Apartment::where('city',$value);
-        $apts = $apartments->get();
+        $apts = $apartments->limit(3)->get();
         return response()->json(['success' => true, 'apartment' => $apts]);
     }
 
