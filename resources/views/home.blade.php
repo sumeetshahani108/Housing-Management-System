@@ -569,7 +569,7 @@
 
         <div class = "filters">
             <h3 class = "tagline">Find your next Home with us.</h3>
-            <button type = "button1"  onclick="window.location='{{ url("signup") }}'" class = "button1">Host</button>
+            <button type = "button1"  onclick="window.location='{{ url("buy") }}'" class = "button1">Host</button>
             <button class = "button2">Rent</button>
             <div class = "glass">
                 <div class = "form-filter">

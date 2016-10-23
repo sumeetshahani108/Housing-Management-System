@@ -92,6 +92,9 @@
             .container4{
                 margin: 4% 6% 4% 5%;
             }
+            .container5{
+                margin: 4% 6% 4% 5%;
+            }
             .book{
                 height: 50px;
                 line-height: 48px;
@@ -130,7 +133,7 @@
 
             }
             .checkout{
-                
+
             }
             .close {
                 color: #aaaaaa;
@@ -240,6 +243,7 @@
             <div class = "container4">
                 <button id="booking-modal-button" class = "book">book</button>
             </div>
+
 
             <div id="booking-modal" class="modal">
                 <div class="modal-content">

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Ratings;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -24,6 +24,19 @@ class RatingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function rate(Request $request){
+        $rate = new Ratings();
+        $rate->apt_id = 11;
+        $rate->profile_id = 10;
+        //$rate->profile_id = Auth::user()->id ;
+        $rate->rating = $request['rating'];
+        $rate->description = $request['rating_description'];
+
+        $rate->save();
+
+        return view('welcome');
+    }
+
     public function create()
     {
         //

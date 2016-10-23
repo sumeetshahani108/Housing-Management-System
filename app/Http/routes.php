@@ -66,11 +66,16 @@ Route::get('/get',[
 
 
 //Route for Rating
-/*
-Route::get('/rating',[
-    'uses' => ''
+
+Route::get('/rate',function(){
+    return view('rating');
+});
+
+Route::post('/rating/',[
+    'uses' => 'RatingController@rate',
+    'as' => 'rating.apartment'
 ]);
-*/
+
 
 Route::get('/home','SearchController@viewSearchFilter');
 
