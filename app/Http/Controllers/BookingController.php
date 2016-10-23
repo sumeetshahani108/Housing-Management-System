@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Apartment;
 use Illuminate\Http\Request;
-use DB;
+use App\Booking ;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class apt_details_controller extends Controller
+class BookingController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -25,11 +25,31 @@ class apt_details_controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function booking(Request $request, $apt_id){
+        $booking = new Booking();
+        $booking->apartment_id = $apt_id;
+        $booking->user_id = 1;
+        $booking->start_date = $request['start-date'];
+        $booking->end = $request['end-date'];
+        $booking->save();
+        return view('welcome');
+    }
+
     public function create()
     {
         //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -37,21 +57,10 @@ class apt_details_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function getDetails($apt_id, Apartment $apartment){
-        //get the details of the apartment using the $id
-        $my_data_query = $apartment->newQuery();
-        $my_data_query->where('apt_id',$apt_id);
-        $data = $my_data_query->get();
-        //echo $data;
-        return view('apartment.details-view',['my_apartment_details' => $data]);
-    }
-
     public function show($id)
     {
         //
     }
-
 
     /**
      * Show the form for editing the specified resource.

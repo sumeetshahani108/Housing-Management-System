@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Apartment;
 use Illuminate\Http\Request;
-use DB;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class apt_details_controller extends Controller
+class RatingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,6 +29,16 @@ class apt_details_controller extends Controller
         //
     }
 
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -37,21 +46,10 @@ class apt_details_controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-    public function getDetails($apt_id, Apartment $apartment){
-        //get the details of the apartment using the $id
-        $my_data_query = $apartment->newQuery();
-        $my_data_query->where('apt_id',$apt_id);
-        $data = $my_data_query->get();
-        //echo $data;
-        return view('apartment.details-view',['my_apartment_details' => $data]);
-    }
-
     public function show($id)
     {
         //
     }
-
 
     /**
      * Show the form for editing the specified resource.

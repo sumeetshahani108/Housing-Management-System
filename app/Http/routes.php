@@ -64,10 +64,21 @@ Route::get('/get',[
     'as' => 'test'
 ]);
 
+
+//Route for Rating
+/*
+Route::get('/rating',[
+    'uses' => ''
+]);
+*/
+
 Route::get('/home','SearchController@viewSearchFilter');
 
 //Booking the Apartment
-
+Route::post('/view-details/{apt_id}',[
+   'uses' => 'BookingController@booking',
+    'as' => 'booking.apt'
+]);
 
 //Password reset routes
 // ? indicates that it is optional, It may or may not be present in the URL.

@@ -104,6 +104,48 @@
                 font-weight: bold;
                 letter-spacing: 1px;
             }
+
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                padding-top: 40px;
+                left: 23%;
+                top: 13%;
+                width: 53%;
+                height: 51%;
+                overflow: auto;
+                background-color: rgb(0,0,0);
+                background-color: rgba(0,0,0,0.4);
+            }
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 21px;
+                height: 86%;
+                border: 1px solid #888;
+                width: 87%;
+            }
+            .checkin{
+
+            }
+            .checkout{
+                
+            }
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
         </style>
     </head>
     @foreach($my_apartment_details as $data)
@@ -196,8 +238,44 @@
                 </div>
             </div>
             <div class = "container4">
-                <button class = "book">book</button>
+                <button id="booking-modal-button" class = "book">book</button>
             </div>
+
+            <div id="booking-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">x</span>
+                    <form method="post" action="{{ route('booking.apt',$data->apt_id) }}" enctype="multipart/form-data">
+                        <input type="date" name="start-date" class = "checkin">
+                        <input type="date" name="end-date" class = "checkout">
+
+                        <input type = "hidden" name = "_token" value = "{{ csrf_token() }}">
+                        <button type = "submit" name = "submit" class = "btn-style" id = "submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        <script>
+            $(document).ready(function(){
+                var modal = document.getElementById('booking-modal');
+
+                var btn = document.getElementById("booking-modal-button");
+
+                var span = document.getElementsByClassName("close")[0];
+
+                btn.onclick = function() {
+                    modal.style.display = "block";
+                }
+
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
+
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            });
+        </script>
         </body>
     @endforeach
 </html>
