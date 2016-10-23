@@ -15,6 +15,7 @@ use Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Image;
 
 class OwnerController extends Controller
 {
@@ -72,7 +73,12 @@ class OwnerController extends Controller
         $Owner->gender = $gender;
         $Owner->age = $age;
         $Owner->regulations = $regulations;
-
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(350, 350)->save(public_path('/img/' . $filename));
+            $Owner->image = $filename;
+        }
         $Owner->save();
 
 
@@ -113,7 +119,6 @@ class OwnerController extends Controller
             'email' => Input::get('email'),
             'password' => Input::get('password')
         );
-
         //login
         if(Auth::validate($userdata)){
             if(Auth::attempt($userdata)){
