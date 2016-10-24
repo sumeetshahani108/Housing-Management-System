@@ -127,7 +127,7 @@
             margin-left: 57%;
             width: 40%;
             height: 100%;
-            margin-top: -29%;
+            margin-top: -17%;
         }
         .myinput{
             height: 50px;

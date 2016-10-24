@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Mail ;
 |
 */
 
+//We use alias instead of authorization instance
+//use LucaDegasperi\OAuth2Server\Authorizer;
+
 $api = app('Dingo\Api\Routing\Router');
 
 //default redirection route
@@ -56,7 +59,7 @@ Route::get('/view-details/{id}',[
 ]);
 
 //Route for AJAX request
-Route::get('home/{value}', 'SearchController@getApartments');
+//Route::get('home/{value}', 'SearchController@getApartments');
 
 //Routes for the Search filters
 Route::get('/get',[
@@ -119,14 +122,15 @@ Route::get('/owner-apartments',[
 Route::post("/apartmentbasic","apt_data_controller@store");
 Route::post("apartmentadditonal","apt_details_controller@store");
 
+
 $api->version('v1', function ($api) {
     $api->post('oauth/access_token', function() {
         return Authorizer::issueAccessToken();
     });
 });
 
-
 $api->version('v1',function($api){
+
     $api->get('users/{user_id}/roles/{role_name}','App\Http\Controllers\HomeController@attachUserRole');
 
     $api->get('users/{user_id}/roles','App\Http\Controllers\HomeController@getUserId');
@@ -136,44 +140,27 @@ $api->version('v1',function($api){
     $api->get('role/{role_name}/permissions','App\Http\Controllers\HomeController@getPermissions');
 
     $api->post('authenticate','App\Http\Controllers\Auth\AuthController@authenticate');
-
-    //$api->get('users','App\Http\Controllers\Auth\AuthController@index');
-    //$api->get('user','App\Http\Controllers\Auth\AuthController@show');
 });
+
+
 
 // Middleware for Authentication
 //Methods inside have to go through authentication
 
 $api->version('v1',['middleware' => 'api.auth'],function($api){
-    $api->get('users','App\Http\Controllers\Auth\AuthController@index');
 
     $api->get('user','App\Http\Controllers\Auth\AuthController@show');
-
+    Route::get('home/{value}', 'SearchController@getApartments');
     //route to refresh the token
     //very important
+    $api->get('users','App\Http\Controllers\Auth\AuthController@index');
     $api->get('token','App\Http\Controllers\Auth\AuthController@getToken');
 
     $api->post('delete','App\Http\Controllers\Auth\AuthController@deleteUser');
-    $api->post('/signUpOwner',[
-      'uses' => 'OwnerController@signUpOwner',
-      'as'=> 'Owner'
-    ]);
-
-    $api->post('/signIn',[
-      'uses' => 'LoginController@login',
-      'as'=> 'signin'
-    ]);
-
-    $api->get('/home',[
-      'uses' => 'LoginController@homeScreen',
-      'as' => 'home',
-      'middleware' => 'auth'
-    ]);
 
     $api->get('user/validate','App\Http\Controllers\UserController@validateUser');
     //create a route where we can display the form for user to submit
-    $api->get('signupowner','OwnerController@getOwnerSignup');
-    $api->post('signupowner','OwnerController@postOwnerSignup');
+
 
     /*
     $api->get('/email',function(){
@@ -184,4 +171,5 @@ $api->version('v1',['middleware' => 'api.auth'],function($api){
       });
     });
     */
+
 });

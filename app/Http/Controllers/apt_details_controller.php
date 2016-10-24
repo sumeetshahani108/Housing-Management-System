@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Apartment;
+use App\Owner;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
@@ -38,13 +39,21 @@ class apt_details_controller extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function getDetails($apt_id, Apartment $apartment){
+    public function getDetails($apt_id, Apartment $apartment, Owner $owner){
         //get the details of the apartment using the $id
         $my_data_query = $apartment->newQuery();
         $my_data_query->where('apt_id',$apt_id);
         $data = $my_data_query->get();
         //echo $data;
-        return view('apartment.details-view',['my_apartment_details' => $data]);
+        foreach($data as $a){
+            $id = $a->owner_id;
+        }
+        $my_owner_query = $owner->newQuery();
+        $my_owner_query->where('owner_id', $id);
+        $owner_data = $my_owner_query->get();
+        //echo $owner_data;
+
+        return view('apartment.details-view',['my_apartment_details' => $data, 'owner_details' => $owner_data]);
     }
 
     public function show($id)

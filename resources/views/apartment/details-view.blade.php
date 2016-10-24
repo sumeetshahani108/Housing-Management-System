@@ -1,3 +1,13 @@
+Last account activity: 50 minutes ago
+Details
+Aysha Jagiasi
+Add to circles
+
+Recent photos
+View photo in messageView photo in messageView photo in message
+Show details
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,6 +144,9 @@
             -webkit-animation-duration: 0.4s;
             animation-name: animatetop;
             animation-duration: 0.4s
+        }
+        .scroll{
+            overflow: scroll;
         }
         /* Add Animation */
         @-webkit-keyframes animatetop {
@@ -295,7 +308,7 @@
     </style>
 </head>
 @foreach($my_apartment_details as $data)
-    <body background="{{URL::asset('/img/log.jpg')}}">
+    <body background="/img/{{ $data->apt_image }}">
     <div class = "container1">
         <table>
             <tr>
@@ -357,38 +370,40 @@
             </tr>
         </table>
     </div>
-    <div class = "container3">
-        <div class = "inner-container">
-            <div class = "owner-details">
-                Owner Details
-            </div>
-            <table class = "name">
-                <tr>
-                    <td class = "deets">Name</td>
-                </tr>
+    @foreach($owner_details as $owner)
+        <div class = "container3">
+            <div class = "inner-container">
+                <div class = "owner-details">
+                    Owner Details
+                </div>
+                <table class = "name">
+                    <tr>
+                        <td class = "deets">Name</td>
+                    </tr>
 
-                <tr>
-                    <td>(owner-name)</td>
-                </tr>
-            </table>
-            <table class = "email">
-                <tr>
-                    <td class = "deets">Email</td>
-                </tr>
-                <tr>
-                    <td>(owner-email))</td>
-                </tr>
-            </table>
-            <table class = "contact">
-                <tr>
-                    <td class = "deets">Contact</td>
-                </tr>
-                <tr>
-                    <td>(owner-contact)</td>
-                </tr>
-            </table>
+                    <tr>
+                        <td>{{ $owner->first_name }}</td>
+                    </tr>
+                </table>
+                <table class = "email">
+                    <tr>
+                        <td class = "deets">Email</td>
+                    </tr>
+                    <tr>
+                        <td>{{ $owner->email }}</td>
+                    </tr>
+                </table>
+                <table class = "contact">
+                    <tr>
+                        <td class = "deets">Contact</td>
+                    </tr>
+                    <tr>
+                        <td>{{ $owner->contact }}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
-    </div>
+    @endforeach
     <div class = "container4">
         <button id="rating-modal-button" class = "book">View Apartment Ratings</button>
     </div>
@@ -419,7 +434,7 @@
         </div>
     </div>
     <div id="rating-modal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content scroll">
             <span class="close" id = "close-rate">x</span>
             <div class = "rate">
 

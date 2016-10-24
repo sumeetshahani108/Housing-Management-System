@@ -10,9 +10,11 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Validator;
+use Illuminate\Http\Response;
+
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Dingo\Api\Routing\Helpers;
 
 class AuthController extends Controller
 {
@@ -27,7 +29,7 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers, ThrottlesLogins, Helpers;
 
     /**
      * Create a new authentication controller instance.
@@ -51,12 +53,10 @@ class AuthController extends Controller
         $credentials = $request->only('email','password');
         try{
             if(! $token = JWTAuth::attempt($credentials)){
-                return $this->response->error(['error' => 'User credentials are not Correct'],401);
+                return $this->response->errorUnauthorized();
             }
         }catch (JWTException $ex){
-            return $this->response->error([
-                'error'=>'Something went wrong'
-            ],500);
+            return $this->response->errorInternal();
         }
 
         return $this->response->array(compact('token'))->setStatusCode(200);
@@ -69,7 +69,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Owner::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -79,7 +79,7 @@ class AuthController extends Controller
     //get all the user
     public function index(){
         try{
-            return User::all();
+            return Owner::all();
         }catch (Exception $ex){
             return $ex;
         }
@@ -93,11 +93,7 @@ class AuthController extends Controller
                 return $this->response->errorNotFound('User not found');
             }
         }catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $ex){
-            return $this->response->error('Token is Invalid');
-        }catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $ex){
-            return $this->response->error('Token is Expired');
-        }catch (\Tymon\JWTAuth\Exceptions\TokenBlacklistedException $ex){
-            return $this->response->error('Token is BlackListed');
+            return $this->response->error('Something went wrong');
         }
 
         return $this->response->array(compact('user'))->setStatusCode(200);
