@@ -145,15 +145,15 @@ $api->version('v1',function($api){
 //Methods inside have to go through authentication
 
 $api->version('v1',['middleware' => 'api.auth'],function($api){
-    //$api->get('users','App\Http\Controllers\Auth\AuthController@index');
+    $api->get('users','App\Http\Controllers\Auth\AuthController@index');
 
-    //$api->get('user','App\Http\Controllers\Auth\AuthController@show');
+    $api->get('user','App\Http\Controllers\Auth\AuthController@show');
 
     //route to refresh the token
     //very important
-    //$api->get('token','App\Http\Controllers\Auth\AuthController@getToken');
+    $api->get('token','App\Http\Controllers\Auth\AuthController@getToken');
 
-    //$api->post('delete','App\Http\Controllers\Auth\AuthController@deleteUser');
+    $api->post('delete','App\Http\Controllers\Auth\AuthController@deleteUser');
     $api->post('/signUpOwner',[
       'uses' => 'OwnerController@signUpOwner',
       'as'=> 'Owner'

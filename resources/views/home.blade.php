@@ -250,8 +250,8 @@
             font-weight: 500;
             margin-top: 1%;
             width: 150px;
-            border: 2px solid #ff5a5f;
-            background: #ff5a5f;
+            border: 2px solid #0e385f;
+            background: #0e385f;
         }
         /*end middle */
 
@@ -488,17 +488,17 @@
             height: 48%;
         }
         #loaded-text-1{
-            margin-left: 13%;
+            margin-left: 1%;
             margin-top: 2%;
             font-size: 34px;
         }
         #loaded-text-2{
-            margin-left: 45%;
+            margin-left: 32%;
             font-size: 34px;
             margin-top: -13%;
         }
         #loaded-text-3{
-            margin-left: 82%;
+            margin-left: 69%;
             margin-top: -13%;
             font-size: 34px;
         }
