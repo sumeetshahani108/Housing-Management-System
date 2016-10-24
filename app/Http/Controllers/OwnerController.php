@@ -122,11 +122,19 @@ class OwnerController extends Controller
         //login
         if(Auth::validate($userdata)){
             if(Auth::attempt($userdata)){
-                return redirect()->route('create.apt');
+                if($request['type'] == 'owner'){
+                    return redirect()->route('owner.main');
+                }else{
+                    return redirect()->route('view.home');
+                }
             }
         }else{
             echo "Failed Session";
         }
+    }
+
+    public function viewMainPage(){
+        return view('owner.main');
     }
 
     public function viewMyApartments(Apartment $apartment){
@@ -134,7 +142,7 @@ class OwnerController extends Controller
             $owner_id = Auth::user()->owner_id;
             $owner_apartments = $apartment->newQuery();
             $owner_apartments->where('owner_id', $owner_id);
-            $query = $owner_apartments->orderBy('apt_id','desc')->paginate(5);
+            $query = $owner_apartments->get();
             echo $query;
         }
 

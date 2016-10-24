@@ -12,6 +12,11 @@
     </div><br>
 
     <div>
+        {!! Form::label('type', 'Select your Type') !!}
+        {!! Form::select('type',['owner' => 'Owner','user' => 'User'],null,['class' => 'login_type']) !!}
+    </div>
+
+    <div>
         {!! Form::submit('Log in') !!}
     </div>
 

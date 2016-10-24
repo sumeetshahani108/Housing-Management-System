@@ -77,7 +77,10 @@ Route::post('/rating/',[
 ]);
 
 
-Route::get('/home','SearchController@viewSearchFilter');
+Route::get('/home',[
+    'uses' => 'SearchController@viewSearchFilter',
+    'as' => 'view.home'
+]);
 
 //Booking the Apartment
 Route::post('/view-details/{apt_id}',[
@@ -102,6 +105,12 @@ Route::get("/apartment",[
     'as' => 'create.apt'
 ]);
 
+//View after the owner login
+Route::get('/owner',[
+   'uses' => 'OwnerController@viewMainPage',
+    'as' => 'owner.main'
+]);
+
 Route::get('/owner-apartments',[
     'uses' => 'OwnerController@viewMyApartments',
     'as' => 'get.owner.apartments'
@@ -116,7 +125,7 @@ $api->version('v1', function ($api) {
     });
 });
 
-/*
+
 $api->version('v1',function($api){
     $api->get('users/{user_id}/roles/{role_name}','App\Http\Controllers\HomeController@attachUserRole');
 
@@ -131,7 +140,7 @@ $api->version('v1',function($api){
     //$api->get('users','App\Http\Controllers\Auth\AuthController@index');
     //$api->get('user','App\Http\Controllers\Auth\AuthController@show');
 });
-*/
+
 // Middleware for Authentication
 //Methods inside have to go through authentication
 
