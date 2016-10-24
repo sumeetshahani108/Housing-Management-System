@@ -124,26 +124,25 @@ Show details
         .modal {
             position: fixed;
             z-index: 1;
-            padding-top: 40px;
-            left: 23%;
-            top: 13%;
-            width: 53%;
-            height: 65%;
+            left: 29%;
+            top: 21%;
+            width: 41%;
+            height: 46%;
             overflow: auto;
             background-color: rgb(0,0,0);
             background-color: rgba(0,0,0,0.4);
         }
         .modal-content {
             background-color: #fefefe;
-            margin: auto;
-            padding: 21px;
-            height: 90%;
+            padding-left: 28px;
+            padding-top: 24px;
+            height: 100%;
             border: 1px solid #888;
-            width: 87%;
+            width: 100%;
             -webkit-animation-name: animatetop;
             -webkit-animation-duration: 0.4s;
             animation-name: animatetop;
-            animation-duration: 0.4s
+            animation-duration: 0.4s;
         }
         .scroll{
             overflow: scroll;
@@ -161,10 +160,12 @@ Show details
 
         /* The Close Button */
         .close {
-            color: white;
+            color: #aaaaaa;
             float: right;
+            margin-right: 3%;
             font-size: 28px;
             font-weight: bold;
+            margin-top: -4%;
         }
 
         .close:hover,
@@ -173,19 +174,23 @@ Show details
             text-decoration: none;
             cursor: pointer;
         }
-        .rate{
-            border: 1px solid black;
-            height: 78px;
-            width: 70%;
-            margin-left: 15%;
-            margin-top: 10%;
+        .rate-name{
+            color: darkgrey;
+            font-family: serif;
+            font-size: 21px;
         }
-        .description{
-            border: 1px solid black;
-            height: 48%;
-            width: 93%;
-            margin-top: 8%;
-            margin-left: 4%;
+        .rate{
+            color: black;
+            font-family: serif;
+            font-size: 15px;
+            margin-top: -3%;
+            margin-bottom: 6%;
+        }
+        .rate-color{
+            border: 1px solid #0e385f;
+            background-color: #0e385f;
+            color: white;
+            border-radius: 21px;
         }
         .checkin{
             height: 50px;
@@ -408,6 +413,7 @@ Show details
         <button id="rating-modal-button" class = "book">View Apartment Ratings</button>
     </div>
     <div class = "container5">
+
         @if ($data->availabiltity === 1)
             <button id="avail-modal-button" class = "book">book-cant</button>
         @else
@@ -436,12 +442,16 @@ Show details
     <div id="rating-modal" class="modal">
         <div class="modal-content scroll">
             <span class="close" id = "close-rate">x</span>
-            <div class = "rate">
-
+            @foreach($rating_details as $rating)
+            <div class = "rating">
+                <div class ="rate-name">
+                    Name
+                </div><br>
+                <div class = "rate">
+                    Rated - <span class = "rate-color">&nbsp&nbsp{{ $rating->rating }}.0&nbsp&nbsp</span> {{ $rating->description }}
+                </div>
             </div>
-            <div class = "description">
-
-            </div>
+            @endforeach
         </div>
     </div>
     <script>

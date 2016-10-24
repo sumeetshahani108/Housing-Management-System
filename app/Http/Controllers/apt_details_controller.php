@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Apartment;
 use App\Owner;
+use App\Ratings;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
@@ -39,7 +40,7 @@ class apt_details_controller extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function getDetails($apt_id, Apartment $apartment, Owner $owner){
+    public function getDetails($apt_id, Apartment $apartment, Owner $owner, Ratings $rating){
         //get the details of the apartment using the $id
         $my_data_query = $apartment->newQuery();
         $my_data_query->where('apt_id',$apt_id);
@@ -47,13 +48,19 @@ class apt_details_controller extends Controller
         //echo $data;
         foreach($data as $a){
             $id = $a->owner_id;
+            $for_rating_id = $a->apt_id;
         }
         $my_owner_query = $owner->newQuery();
         $my_owner_query->where('owner_id', $id);
         $owner_data = $my_owner_query->get();
         //echo $owner_data;
 
-        return view('apartment.details-view',['my_apartment_details' => $data, 'owner_details' => $owner_data]);
+        $my_rating_query = $rating->newQuery();
+        $my_rating_query->where('apartment_id',$for_rating_id);
+        $rating_data = $my_rating_query->get();
+        //$rating_data;
+
+        return view('apartment.details-view',['my_apartment_details' => $data, 'owner_details' => $owner_data, 'rating_details' => $rating_data]);
     }
 
     public function show($id)

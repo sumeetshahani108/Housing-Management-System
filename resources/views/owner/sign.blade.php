@@ -25,13 +25,13 @@
             position: relative;
             background-color: #fefefe;
             background: url(img/log.jpg);
-            background-size: 580px 300px;
+            background-size: 580px 400px;
             background-repeat: no-repeat;
             margin: auto;
             padding: 0;
             border: 1px solid #888;
             width: 40%;
-            height: 45%;
+            height: 57%;
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
             -webkit-animation-name: animatetop;
             -webkit-animation-duration: 0.4s;
@@ -127,7 +127,7 @@
             margin-left: 57%;
             width: 40%;
             height: 100%;
-            margin-top: -17%;
+            margin-top: -29%;
         }
         .myinput{
             height: 50px;
@@ -310,6 +310,8 @@
 
         {!! Form::text('age', null, array('required','placeholder' => 'AGE','class' => 'myinput')) !!}
 
+        {!! Form::select('type_of_user',['owner' => 'OWNER', 'user' => 'TENANT'],null,['class' => 'drop']) !!}
+
         {!! Form::text('regulations', null, array('required','placeholder' => 'REGULATIONS','class' => 'myinput')) !!}
 
         <div class = "file">
@@ -338,10 +340,10 @@
     <div class="modal-content">
 
         <div class="modal-body">
-            <span class="close">×</span>
+            <span id = "close-login" class="close">ï¿½</span>
 
             <div class = "form">
-                {!! Form::open([ 'method' => 'post']) !!}
+                {!! Form::open(array('url' => 'login','method' => 'post')) !!}
 
 
                 {!! Form::text('email', null, array('required','placeholder' => 'Email Address','class' => 'modal-input')) !!}
@@ -349,7 +351,9 @@
                 <br>
 
                 {!! Form::password('password', array('required','placeholder' => 'Password','class' => 'modal-input')) !!}
+                <br>
 
+                {!! Form::select('type',['owner' => 'Owner','user' => 'Tenant'],null,['class' => 'modal-input']) !!}
 
                 {!! Form::submit('Log in',array('type' => 'button','class' => 'modal-button')) !!}
 
@@ -371,7 +375,7 @@
     var btn = document.getElementById("booking-modal-button");
 
     // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    var span = document.getElementById("close-login");
 
     // When the user clicks the button, open the modal
     btn.onclick = function() {

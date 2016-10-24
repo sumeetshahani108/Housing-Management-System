@@ -57,7 +57,11 @@ Route::get('/view-details/{id}',[
    'uses' => 'apt_details_controller@getDetails',
     'as' => 'apartment.details-view'
 ]);
-
+//edit route
+Route::post('/edit',[
+    'uses' => 'apt_data_controller@postEditPost',
+    'as' => 'edit'
+]);
 //Route for AJAX request
 //Route::get('home/{value}', 'SearchController@getApartments');
 

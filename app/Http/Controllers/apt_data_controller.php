@@ -117,6 +117,18 @@ class apt_data_controller extends Controller
         $apt->delete();
         //return redirection route  ;
     }
+
+    public function postEditPost(Request $request)
+    {
+        $this->validate($request,[
+            'price' => 'required'
+        ]);
+
+        $apt = Post::find($request['apt_id']);
+        $apt->price = $request['price'];
+        $apt->update();
+        return response()->json(['message' => 'post edited'],200);
+    }
     /**
      * Display the specified resource.
      *

@@ -143,7 +143,8 @@ class OwnerController extends Controller
             $owner_apartments = $apartment->newQuery();
             $owner_apartments->where('owner_id', $owner_id);
             $query = $owner_apartments->get();
-            echo $query;
+            //echo $query;
+            return view('owner.myapartments',['apartment' => $query]);
         }
 
     }
