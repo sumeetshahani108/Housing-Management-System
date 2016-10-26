@@ -35,6 +35,12 @@ Route::get('/buy',[
     'as' => 'buy'
 ]);
 
+//Route for delete apartment
+Route::get('/owner-apartments/{id}',[
+    'uses' => 'apt_data_controller@deleteApartment',
+    'as' => 'apt.delete'
+]);
+
 //Route for sign-in owner
 Route::get('/view',function(){
    return view('owner.sign');
@@ -121,6 +127,11 @@ Route::get('/owner',[
 Route::get('/owner-apartments',[
     'uses' => 'OwnerController@viewMyApartments',
     'as' => 'get.owner.apartments'
+]);
+
+Route::get('/buy',[
+   'uses' => 'OwnerController@logOut',
+    'as' => 'user.logout'
 ]);
 
 Route::post("/apartmentbasic","apt_data_controller@store");

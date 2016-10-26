@@ -127,7 +127,7 @@
             margin-left: 57%;
             width: 40%;
             height: 100%;
-            margin-top: -29%;
+            margin-top: -42%;
         }
         .myinput{
             height: 50px;
@@ -274,17 +274,19 @@
             cursor: pointer;
         }
     </style>
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class = "top-container">
-    <button id="booking-modal-button" class = "book">book</button>
+    <button id="booking-modal-button" class = "book">Login</button>
 </div>
 
 <div class = "main-container">
     <div class = "left-container">
-        Facebook helps you connect and share with the people in your life.
+        AMS helps you connect and share with the people in your life.
         <div class = "image-container">
-            <img src="{{URL::asset('/img/fb.png')}}">
+            <img src="{{URL::asset('/img/mumbai.jpg')}}">
         </div>
     </div>
     <div class = "right-container">

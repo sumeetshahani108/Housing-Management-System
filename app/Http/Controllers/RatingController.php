@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Ratings;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Booking;
+use Illuminate\Support\Facades\Auth;
 
 class RatingController extends Controller
 {
@@ -24,17 +26,26 @@ class RatingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function rate(Request $request){
+    public function rate(Request $request, Booking $booking){
+
+        $my_apartment_get_query = $booking->newQuery();
+        $my_apartment_get_query->where('user_id',Auth::user()->owner_id);
+        $my_data = $my_apartment_get_query->get();
+
+        foreach($my_data as $data){
+            $apartment_id = $data->apartment_id;
+        }
+
         $rate = new Ratings();
-        $rate->apt_id = 11;
-        $rate->profile_id = 10;
+        $rate->apartment_id = $apartment_id;
+        $rate->my_profile_id = Auth::user()->owner_id;
         //$rate->profile_id = Auth::user()->id ;
         $rate->rating = $request['rating'];
         $rate->description = $request['rating_description'];
 
         $rate->save();
 
-        return view('welcome');
+        return view('home');
     }
 
     public function create()

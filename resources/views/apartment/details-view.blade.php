@@ -17,7 +17,7 @@ Show details
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
     <style>
         body{
             background-repeat: no-repeat;
@@ -126,6 +126,7 @@ Show details
             z-index: 1;
             left: 29%;
             top: 21%;
+            display: none;
             width: 41%;
             height: 46%;
             overflow: auto;
@@ -311,9 +312,10 @@ Show details
         }
         /*footer end*/
     </style>
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 </head>
 @foreach($my_apartment_details as $data)
-    <body background="/img/{{ $data->apt_image }}">
+    <body background="/img/log.jpg">
     <div class = "container1">
         <table>
             <tr>

@@ -50,7 +50,8 @@ class OwnerController extends Controller
             'gender' => 'required',
             'age' => 'required',
             'regulations' => 'required',
-            'password' => 'required|min:4'
+            'password' => 'required|min:4',
+            'type' => 'required'
         ]);
 
         $first_name = $request['first_name'];
@@ -62,6 +63,7 @@ class OwnerController extends Controller
         $gender = $request['gender'];
         $age = $request['age'];
         $regulations = $request['regulations'];
+        $type = $request['type_of_user'];
 
         $Owner = new Owner();
         $Owner->first_name = $first_name;
@@ -73,6 +75,8 @@ class OwnerController extends Controller
         $Owner->gender = $gender;
         $Owner->age = $age;
         $Owner->regulations = $regulations;
+        $Owner->type_of_user = $type;
+
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
@@ -125,7 +129,9 @@ class OwnerController extends Controller
                 if($request['type'] == 'owner'){
                     return redirect()->route('owner.main');
                 }else{
-                    return redirect()->route('view.home');
+                    if(Auth::check()){
+                        return redirect()->route('view.home');
+                    }
                 }
             }
         }else{
@@ -150,8 +156,9 @@ class OwnerController extends Controller
     }
 
     public function logOut(){
-        Auth::logout();
+        
         //redirection route ;
+        return view('owner.sign');
     }
 
     public function create()

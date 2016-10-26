@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Apartment;
+
 
 class apt_data_controller extends Controller
 {
@@ -110,22 +112,33 @@ class apt_data_controller extends Controller
 
     //Auth::user() -> returns the user currently logged in.
     public function deleteApartment($apartment_id){
-        $apt = Post::where('apt_id',$apartment_id);
-        if(Auth::user() != $apt->user){
-            return redirect()->back();
-        }
+        $apt = Apartment::where('apt_id',$apartment_id);
         $apt->delete();
         //return redirection route  ;
+        return view('owner.main');
     }
 
     public function postEditPost(Request $request)
     {
-        $this->validate($request,[
-            'price' => 'required'
-        ]);
 
-        $apt = Post::find($request['apt_id']);
-        $apt->price = $request['price'];
+        $apt = Apartment::find($request['apt_id']);
+
+        if($request->has('price')){
+            $apt->price = $request['price'];
+        }
+        if($request->has('locality')){
+            $apt->locality = $request['locality'];
+        }
+        if($request->has('bhk')){
+            $apt->BHK = $request['bhk'];
+        }
+        if($request->has('city')){
+            $apt->city = $request['city'];
+        }
+        if($request->has('type')){
+            $apt->type_of_apartment = $request['type'];
+        }
+
         $apt->update();
         return response()->json(['message' => 'post edited'],200);
     }

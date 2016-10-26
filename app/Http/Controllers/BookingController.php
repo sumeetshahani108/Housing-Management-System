@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Booking ;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Apartment;
 
 class BookingController extends Controller
 {
@@ -32,7 +33,12 @@ class BookingController extends Controller
         $booking->start_date = $request['start-date'];
         $booking->end = $request['end-date'];
         $booking->save();
-        return view('welcome');
+
+        $apartment = Apartment::find($apt_id);
+        $apartment->availabiltity = 1;
+        $apartment->update();
+
+        return view('home');
     }
 
     public function create()
