@@ -101,6 +101,10 @@ Route::post('/view-details/{apt_id}',[
     'as' => 'booking.apt'
 ]);
 
+Route::get('/maps',function(){
+   return view('maps');
+});
+
 //Password reset routes
 // ? indicates that it is optional, It may or may not be present in the URL.
 

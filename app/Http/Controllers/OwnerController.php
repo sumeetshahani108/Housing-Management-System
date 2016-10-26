@@ -51,7 +51,7 @@ class OwnerController extends Controller
             'age' => 'required',
             'regulations' => 'required',
             'password' => 'required|min:4',
-            'type' => 'required'
+            'type_of_user' => 'required'
         ]);
 
         $first_name = $request['first_name'];
@@ -97,12 +97,10 @@ class OwnerController extends Controller
             $message->subject($data['full_name']);
         });
 
-        if(count(Mail::failures()) > 0){
-            foreach(Mail::failures as $email_address) {
-                echo " - $email_address <br />";
-            }
+        if($request['type_of_user'] == 'owner'){
+            return redirect()->route('owner.main');
         }else{
-            return view('welcome');
+            return redirect()->route('view.home');
         }
     }
 
@@ -158,6 +156,7 @@ class OwnerController extends Controller
     public function logOut(){
         
         //redirection route ;
+        Auth::logout();
         return view('owner.sign');
     }
 

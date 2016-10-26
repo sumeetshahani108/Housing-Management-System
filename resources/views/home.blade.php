@@ -148,14 +148,14 @@
         }
         .button2{
             color: black;
-            width: 80px;
+            width: 180px;
             font-size: 13px;
             text-transform: uppercase;
             font-weight: bold;
             height: 50px;
             opacity: 0.9;
-            margin-top: -20%;
-
+            margin-top: -4%;
+            margin-left: 60%;
         }
         .top-right-container {
             padding: 100px;
@@ -602,6 +602,7 @@
     <div class = "filters">
         <h3 class = "tagline">Find your next Home with us.</h3>
         <button type = "button1"  onclick="window.location='{{ url("rate") }}'" class = "button1">Rate your Apartment</button>
+        <a href="{{ route('user.logout') }}"><button type = "button1" class = "button2">Logout</button></a>
         <div class = "glass">
             <div class = "form-filter">
                 {!! Form::open(['route' => 'test', 'method' => 'get']) !!}
