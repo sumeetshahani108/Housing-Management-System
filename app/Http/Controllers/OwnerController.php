@@ -38,6 +38,7 @@ class OwnerController extends Controller
     // An example of dependency injection
     public function signUpOwner(Request $request){
 
+
         //validate() is a helper function developed in laravel framework.
         // include in App\Http\Controllers\Controller
 
@@ -78,6 +79,8 @@ class OwnerController extends Controller
         $Owner->type_of_user = $type;
 
         if($request->hasFile('image')) {
+
+
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             Image::make($image)->resize(350, 350)->save(public_path('/img/' . $filename));
@@ -92,6 +95,7 @@ class OwnerController extends Controller
             'full_name' => $first_name." ".$last_name
         );
         Mail::send('emails.contact', $data ,function($message) use ($data){
+
             $message->from($data['email']);
             $message->to('sumeet.shahani108@gmail.com');
             $message->subject($data['full_name']);

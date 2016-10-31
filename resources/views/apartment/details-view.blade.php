@@ -311,8 +311,8 @@ Show details
             cursor: pointer;
         }
         /*footer end*/
+
     </style>
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 </head>
 @foreach($my_apartment_details as $data)
     <body background="/img/log.jpg">
@@ -368,7 +368,9 @@ Show details
                 <td class = "head">Availability</td>
             </tr>
             <tr>
-                <td>(rules regs from owner acc)</td>
+                @foreach($owner_details as $owner)
+                <td>{{ $owner->regulations }}</td>
+                @endforeach
                 <td>@if ($data->availabiltity === 1)
                         Not Available
                     @else

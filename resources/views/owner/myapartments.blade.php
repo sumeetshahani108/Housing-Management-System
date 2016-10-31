@@ -1,5 +1,6 @@
 <html>
 <head>
+    <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
     <script src = "{{ URL::to('src/js/app.js') }}"></script>
     <style>
         body{
@@ -167,6 +168,7 @@
                     <td> Price </td>
                     <td class ="right">{{ $apt->price }}</td>
                 </tr>
+
             </table>
 
 
@@ -186,7 +188,7 @@
                 <input type="text"   id="locality-body" name="locality-body" placeholder="Locality"><br><br>
                 <input type="text" id="bhk-body" name="bhk-body" placeholder="BHK"><br><br>
                 <input type="text" id="city-body" name="city-body" placeholder="city"><br><br>
-                <input type="text" id="type-body" name="type-body" placeholder="Type of Apartment"><br><br>
+                <input type="text" id="type_of_apartment-body" name="type_of_apartment-body" placeholder="Type of Apartment"><br><br>
                 <button id = "modal-save">Save</button>
             </form>
         </div>

@@ -573,10 +573,11 @@
                         var img1 = my_apartment_array[0].apt_image;
                         var img2 = my_apartment_array[1].apt_image;
                         var img3 = my_apartment_array[2].apt_image;
+                        //console.log(img1);
 
-                        document.getElementById('my-image-1').setAttribute();
-                        document.getElementById('my-image-2').setAttribute();
-                        document.getElementById('my-image-3').setAttribute();
+                        $('#my-image-1').attr("src","img/img1");
+                        $('#my-image-2').attr("src","img/img2");
+                        $('#my-image-3').attr("src","img/img3");
                     }
                 });
             }
@@ -657,19 +658,19 @@
     <div class = "suggest-text"><strong>Top Collections in <span id="suggestion-header">Mumbai</span></strong></div>
     <div class = "suggest1">
         <div class="loaded-image-1">
-            <img src="img/greece.jpg" id="my-image-1">
+            <img src="img/1477533138.jpg" id="my-image-1">
             <div id="loaded-text-1">Powai</div>
         </div>
     </div>
     <div class = "suggest2">
         <div class="loaded-image-2">
-            <img src="img/paris.jpg" id="my-image-2">
+            <img src="img/1477533462.jpg" id="my-image-2">
             <div id="loaded-text-2">Malhabar Hills</div>
         </div>
     </div>
     <div class = "suggest3">
         <div class="loaded-image-3">
-            <img src="img/mumbai.jpg" id="my-image-3">
+            <img src="img/1477535146.jpg" id="my-image-3">
             <div id="loaded-text-3">Juhu</div>
         </div>
     </div>

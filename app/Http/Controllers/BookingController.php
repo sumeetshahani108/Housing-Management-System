@@ -29,7 +29,7 @@ class BookingController extends Controller
     public function booking(Request $request, $apt_id){
         $booking = new Booking();
         $booking->apartment_id = $apt_id;
-        $booking->user_id = 1;
+        $booking->user_id = Auth::user()->owner_id;
         $booking->start_date = $request['start-date'];
         $booking->end = $request['end-date'];
         $booking->save();
