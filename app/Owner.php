@@ -34,4 +34,10 @@ class Owner extends Model implements AuthenticatableContract, CanResetPasswordCo
     public function getReminderEmail(){
         return $this->email;
     }
+
+     public function likes()
+    {
+        return $this->hasMany('App\Like');
+    }
+
 }

@@ -26,4 +26,22 @@ $(document).ready(function(){
                 console.log(JSON.stringify(msg));
             });
     });
+
+    var likes = 0;
+    $('.like').on('click',function(event){
+        event.preventDefault();
+        isLike = event.target.previousElementSibling == null;
+        apt_id = event.target.parentNode.dataset['apt_id'];
+        console.log(apt_id);
+        console.log(isLike);
+        $.ajax({
+            method: 'POST',
+            url: like,
+            data: { isLike: isLike, apt_id: apt_id, _token: token }
+        })
+            .done(function(){
+                console.log('working');
+            });
+    });
+
 });

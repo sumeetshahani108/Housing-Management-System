@@ -77,6 +77,18 @@ Route::get('/get',[
     'as' => 'test'
 ]);
 
+//owner checks interested
+Route::get('/check-interested/{id}',[
+    'uses' => 'OwnerController@interested',
+    'as' => 'check-interested'
+]);
+
+
+//route for interested
+Route::post('/like',[
+    'uses' => 'interestedController@postLikePost',
+    'as' => 'like'
+]);
 
 //Route for Rating
 

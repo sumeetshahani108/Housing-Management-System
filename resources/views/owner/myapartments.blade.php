@@ -31,14 +31,11 @@
         tr{
             height: 35px;
         }
-        td{
-
-        }
         .right{
             text-align: right;
         }
         .editpost{
-            margin-left: 40%;
+            margin-left: 30%;
             margin-top: 4%
         }
         .edit{
@@ -59,6 +56,22 @@
             opacity: 0.9;
         }
         .delete{
+            width: 16%;
+            height: 5%;
+            margin-right: 5%;
+            color: #fff;
+            border: 1px solid #fff;
+            text-align: center;
+            outline: none;
+            text-decoration: none;
+            color: black;
+            font-size: 13px;
+            text-transform: uppercase;
+            font-weight: bold;
+
+            opacity: 0.9;
+        }
+        .interested{
             width: 16%;
             height: 5%;
 
@@ -140,6 +153,7 @@
             cursor: pointer;
         }
     </style>
+
 </head>
 @foreach($apartment as $apt)
     <body>
@@ -176,6 +190,7 @@
         <div class = "editpost">
             <button id = "edit-button-modal" class = "edit">Edit</button>
             <a href="{{ route('apt.delete', $apt->apt_id) }}"><button class = "delete">Delete</button></a>
+            <a href="{{ route('check-interested', $apt->apt_id) }}"><button class = "interested">Interested</button></a>
         </div>
     </div>
 

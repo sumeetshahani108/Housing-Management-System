@@ -311,6 +311,34 @@ Show details
             cursor: pointer;
         }
         /*footer end*/
+        .int-container{
+            margin: 4% 6% 1% 5%;
+        }
+        #int{
+            height: 50px;
+            line-height: 48px;
+            border: 2px solid #0e385f;
+            background: #0e385f;
+            color: #fff;
+            width: 49%;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        #not-int{
+            height: 50px;
+            line-height: 48px;
+            border: 2px solid #0e385f;
+            background: #0e385f;
+            color: #fff;
+            width: 50%;
+            margin-left: 0.5%;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
 
     </style>
 </head>
@@ -413,6 +441,13 @@ Show details
             </div>
         </div>
     @endforeach
+
+    <div class = "int-container" data-apt_id="{{ $data->apt_id }}">
+        <button id="int" class = "like">Interested</button>
+        <button id ="not-int" class = "like">Not Interested</button>
+    </div>
+
+
     <div class = "container4">
         <button id="rating-modal-button" class = "book">View Apartment Ratings</button>
     </div>

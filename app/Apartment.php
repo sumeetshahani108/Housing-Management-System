@@ -17,4 +17,10 @@ class Apartment extends Model
     public function ratings(){
         return $this->hasMany('App\Ratings');
     }
+
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
+    }
+
 }
