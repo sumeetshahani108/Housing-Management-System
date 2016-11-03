@@ -3,6 +3,7 @@
 namespace App;
 
 
+use App\Like;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;

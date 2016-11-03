@@ -343,7 +343,7 @@ Show details
     </style>
 </head>
 @foreach($my_apartment_details as $data)
-    <body background="/img/log.jpg">
+    <body background="/img/{{ $data->apt_image }}">
     <div class = "container1">
         <table>
             <tr>

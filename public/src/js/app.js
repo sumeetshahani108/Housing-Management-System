@@ -20,7 +20,7 @@ $(document).ready(function(){
         $.ajax({
             method: 'POST',
             url: urlLike,
-            data: { price: $('#price-body').val(), locality : $('#locality-body').val() , bhk : $('#bhk-body').val() , city : $('#city-body').val(), type : $('#type_of_apartment-body').val() ,apt_id: 2, _token: token }
+            data: { price: $('#price-body').val(), locality : $('#locality-body').val() , bhk : $('#bhk-body').val() , city : $('#city-body').val(), type : $('#type_of_apartment-body').val() ,apt_id: 3, _token: token }
         })
             .done(function(msg){
                 console.log(JSON.stringify(msg));

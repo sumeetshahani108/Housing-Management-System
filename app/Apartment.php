@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Like;
 use App\Owner;
 use Illuminate\Database\Eloquent\Model;
 
